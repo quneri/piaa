@@ -58,3 +58,4 @@ solution = solve(n)
 print(len(solution))
 for x, y, w in solution:
     print(x + 1, y + 1, w)
+
