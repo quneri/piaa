@@ -46,7 +46,7 @@ def solve(n):
             continue
 
         stack[-1][2] -= 1
-        if len(solution) >= best_count:
+        if len(solution) + 1 >= best_count:
             continue
 
         if not can_place_square(x, y, size):
@@ -66,6 +66,10 @@ def solve(n):
         else:
             nx, ny = empty
             max_size = min(n - nx, n - ny, n - 1)
+
+            while max_size > 0 and not can_place_square(nx, ny, max_size):
+                max_size -= 1
+
             stack.append([nx, ny, max_size])
 
     return best_solution
