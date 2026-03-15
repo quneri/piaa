@@ -17,7 +17,7 @@ def solve(n):
             stack.pop()
             continue
 
-        current_size = stack[-1][2].pop()
+        current_size = stack[-1][2].pop(0)
         current_solution_state = stack[-1][0]
         current_heights_state = stack[-1][1]
 
@@ -41,7 +41,6 @@ def solve(n):
 
         next_min_height = min(new_heights)
         next_index = new_heights.index(next_min_height)
-
         next_max_width = 0
         while next_index + next_max_width < n and new_heights[next_index + next_max_width] == next_min_height:
             next_max_width += 1
@@ -49,7 +48,8 @@ def solve(n):
         next_max_size = min(next_max_width, n - next_min_height)
 
         if len(new_solution) + 1 < best_count:
-            stack.append([new_solution, new_heights, list(range(1, next_max_size + 1))])
+            possible_sizes = [i for i in range(next_max_size, 0, -1)]
+            stack.append([new_solution, new_heights, possible_sizes])
 
     if best_solution:
         print(best_count)
