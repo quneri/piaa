@@ -5,7 +5,7 @@
 using namespace std;
 
 int M, N;
-int best_square_count = 1000000000;
+int best_square_count;
 int solution_amount = 0;
 
 vector<vector<int>> grid;
@@ -56,7 +56,7 @@ void backtracking(int squares_count)
 {
     // cout << "[BACKTRACK] Current squares: " << squares_count << endl;
 
-    if (squares_count >= best_square_count)
+    if (squares_count > best_square_count)
     {
         // cout << "[STOP] Current count is not better than best result" << endl;
         return;
@@ -66,7 +66,7 @@ void backtracking(int squares_count)
 
     if (x == -1)
     {
-        cout << "[FOUND] Field completed with " << squares_count << " squares" << endl;
+        // cout << "[FOUND] Field completed with " << squares_count << " squares" << endl;
 
         if (squares_count < best_square_count)
         {
@@ -86,14 +86,14 @@ void backtracking(int squares_count)
     // cout << "[EMPTY CELL] Position: (" << x << "," << y << ")" << endl;
 
     int max_size = min(M - x, N - y);
-    max_size = min(max_size, N - 1);
+    max_size = min(max_size, min(M, N) - 1);
 
     // cout << "[MAX SIZE] " << max_size << endl;
 
     for (int size = max_size; size >= 1; size--)
     {
         // cout << "[TRY] Square " << size << "x" << size << " at (" << x << "," << y << ")" << endl;
-
+        
         if (can_place(x, y, size))
         {
             // cout << "[PLACE] Square " << size << "x" << size << " added" << endl;
